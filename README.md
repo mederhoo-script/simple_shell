@@ -1,1 +1,1 @@
-# simple shell
+shell pair project 
