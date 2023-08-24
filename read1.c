@@ -1,49 +1,65 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <string.h>
 #include "shead.h"
 
 /**
- * read_it - function to read input
+ * read_command_with_args - Read input line and that tokenize
  *
- * Return: void
+ * Return: Arrays
  */
-
-char *read_it(void)
+char **read_command_with_args(void)
 {
-	int buf_size = 256;
-	int i = 0;
-	char *buffer = malloc(buf_size * sizeof(char));
+	char *input_line = NULL;
+	size_t input_size = 0;
+	ssize_t chars_read;
+	char **tokens;
+	char *token;
+	int token_count = 0;
 
-	if (!buffer)
+	/* Read input line with getline */
+	chars_read = getline(&input_line, &input_size, stdin);
+	if (chars_read == -1)
 	{
-		perror("malloc fail");
+		free(input_line);
+		return (NULL);
+	}
+	input_line[chars_read - 1] = '\0'; /* Remove newline character */
+
+	/* Tokenize the input_line */
+	
+
+	tokens = malloc(sizeof(char *));
+	if (tokens == NULL)
+	{
+		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
 
-	while (1)
+	token = strtok(input_line, " ");
+	while (token != NULL)
 	{
-		char c;
-		int result;
-
-		result = read(STDIN_FILENO, &c, 1);
-
-		if (result == -1)
+		tokens[token_count] = strdup(token);
+		if (tokens[token_count] == NULL)
 		{
-			perror("read fail");
+			perror("strdup");
 			exit(EXIT_FAILURE);
 		}
-/*reset \n to '\0' */
-		if (result == 0 || c == '\n')
+
+		token_count++;
+		tokens = realloc(tokens, (token_count + 1) * sizeof(char *));
+		if (tokens == NULL)
 		{
-			buffer[i] = '\0';
-			return (buffer);
-		}
-		else
-		{
-			buffer[i] = c;
+			perror("realloc");
+			exit(EXIT_FAILURE);
 		}
 
-		i++;
+		token = strtok(NULL, " ");
 	}
+	tokens[token_count] = NULL; 
+	/* Null-terminate the array of tokens */
+
+	free(input_line);
+
+	return (tokens);
 }

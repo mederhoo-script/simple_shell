@@ -6,12 +6,13 @@
 #include <unistd.h>
 #include "shead.h"
 
-/**
- * exe_com - function that execute command
- * @command: - parameter to be execute
- */
 
-void exe_com(const char *command)
+/**
+ * exe_com - Execute a command.
+ * @command: The command to execute.
+ * @args: An array of strings representing command arguments.
+ */
+void exe_com(const char *command, char **args)
 {
 	pid_t pid = fork();
 
@@ -20,27 +21,31 @@ void exe_com(const char *command)
 		perror("fork fail");
 		exit(EXIT_FAILURE);
 	}
-	/*0 is child pid */
 	else if (pid == 0)
 	{
-		/*Child process */
-		const char *args[2];
+		/* Child process */
+		execve(command, args, NULL);
 
-		args[0] = command;
-		args[1] = NULL;
-
-		execve(command, (char *const *)args, NULL);
-
-		/*error check If execve fails*/
+		/* Error check if execve fails */
 		perror("./shell");
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		/**
-		 * Parent proces
-		 * Wait for the child process to complete
-		 */
+		/* Parent process */
+		/* Wait for the child process to complete */
 		wait(NULL);
+
+		/* Check if the command is "exit" */
+		if (strcmp(command, "exit") == 0)
+		{
+			perror("Exiting the shell...\n");
+			exit(EXIT_SUCCESS);
+		}
+		/* Check if the command is "env" */
+		else if (strcmp(command, "env") == 0)
+		{
+			builtin_env();
+		}
 	}
 }
