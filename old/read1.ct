@@ -26,7 +26,7 @@ char **read_command_with_args(void)
 	}
 	input_line[chars_read - 1] = '\0'; /* Remove newline character */
 
-	/* Tokenize the input_line */
+/* Tokenize the input_line */
 	
 
 	tokens = malloc(sizeof(char *));

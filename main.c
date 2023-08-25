@@ -1,7 +1,9 @@
-#include "shead.h"
-#include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
+#include <sys/wait.h>
+#include "shead.h"
 
 /**
  * main - Entry point of the program.
@@ -10,60 +12,34 @@
  */
 int main(void)
 {
-    char **command_and_args;
-    char *command;
-    char *full_path;
-    int i;
+	char *input = NULL;
+	size_t input_size = 0;
+	ssize_t getline_result = 0;
+	pid_t pid = -1;
+	char **args = NULL;
 
-    while (1)
-    {
-        prompt_out();
+	handle_input(&input, &input_size);
 
-        command_and_args = read_command_with_args();
-        if (command_and_args == NULL)
-        {
-            write(STDOUT_FILENO, "\n", 1);
-            break; /* Exit the loop when the user presses Ctrl+D (EOF) */
-        }
+	while (1)
+	{
+		handle_prompt(&input, &input_size);
 
-        command = command_and_args[0];
+		if (handle_getline(&input, &input_size, &getline_result))
+			break;
 
-        /* Check if the command is "exit" */
-        if (strcmp(command, "exit") == 0)
-        {
-            char exit_message[] = "Exiting the shell...\n";
-            write(STDOUT_FILENO, exit_message, strlen(exit_message));
-            break; /* Exit the loop when the user enters the "exit" command */
-        }
-        /* Check if the command is "env" */
-        else if (strcmp(command, "env") == 0)
-        {
-            builtin_env();
-        }
-        else
-        {
-            full_path = find_exe(command);
-            if (full_path != NULL)
-            {
-                exe_com(full_path, command_and_args);
-                free(full_path);
-            }
-            else
-            {
-                char not_found[] = "Command not found: ";
-                write(STDOUT_FILENO, not_found, strlen(not_found));
-                write(STDOUT_FILENO, command, strlen(command));
-                write(STDOUT_FILENO, "\n", 1);
-            }
-        }
+		if (handle_empty_input(input))
+		{
+			continue;
+		}
 
-        /* Free allocated memory */
-        for (i = 0; command_and_args[i] != NULL; i++)
-        {
-            free(command_and_args[i]);
-        }
-        free(command_and_args);
-    }
+		pid = fork();
 
-    return 0;
+		if (handle_fork(pid))
+		{
+			handle_child_or_parent(pid, input);
+		}
+	}
+
+	handle_cleanup(args, input);
+	return (0);
 }

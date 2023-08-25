@@ -3,6 +3,5 @@
 	"editor.tabCompletion": "on",
 	"editor.defaultFormatter": "vscode.configuration-editing",
 	"editor.insertSpaces": false,
-	"files.autoSave": "afterDelay",
 	"editor.detectIndentation": false
 }

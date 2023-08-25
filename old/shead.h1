@@ -1,0 +1,17 @@
+#ifndef SHEAD_H
+#define SHEAD_H
+
+void prompt_out(void);
+char *read_it(void);
+void exe_com(const char *command, char **args, char **environ);
+char *find_exe(const char *command);
+char **read_command_with_args(void);
+void builtin_env(void);
+void builtin_setenv(char **args);
+void builtin_unsetenv(char **args);
+void builtin_cd(char **args);
+void builtin_exit(char **command_and_args);
+int builtin_path(const char *input);
+
+
+#endif /* SHEAD_H */

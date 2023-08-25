@@ -12,22 +12,24 @@
  * @command: The command to execute.
  * @args: An array of strings representing command arguments.
  */
-void exe_com(const char *command, char **args)
+void exe_com(const char *command, char **args, char **environ)
 {
+
+	
 	pid_t pid = fork();
 
 	if (pid == -1)
 	{
-		perror("fork fail");
+		perror("fork");
 		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
 	{
 		/* Child process */
-		execve(command, args, NULL);
+		execve(command, args, environ);
 
 		/* Error check if execve fails */
-		perror("./shell");
+		perror("execve");
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -35,17 +37,5 @@ void exe_com(const char *command, char **args)
 		/* Parent process */
 		/* Wait for the child process to complete */
 		wait(NULL);
-
-		/* Check if the command is "exit" */
-		if (strcmp(command, "exit") == 0)
-		{
-			perror("Exiting the shell...\n");
-			exit(EXIT_SUCCESS);
-		}
-		/* Check if the command is "env" */
-		else if (strcmp(command, "env") == 0)
-		{
-			builtin_env();
-		}
-	}
+	}		
 }

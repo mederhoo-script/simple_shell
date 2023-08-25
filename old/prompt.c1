@@ -17,5 +17,5 @@ void prompt_out(void)
 
 	write(STDOUT_FILENO, prompt, strlen(prompt));
 
-	}
+} 
 }
