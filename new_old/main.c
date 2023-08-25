@@ -22,15 +22,13 @@ int main(void)
 
 	while (1)
 	{
-		handle_prompt(&input, &input_size);
+		handle_prompt();
 
-		if (handle_getline(&input, &input_size, &getline_result))
-			break;
-
-		if (handle_empty_input(input))
+		handle_getline(&input, &input_size, &getline_result);
+		if (execute_command(input))
 		{
-			continue;
-		}
+    		continue;
+    	}
 
 		pid = fork();
 
