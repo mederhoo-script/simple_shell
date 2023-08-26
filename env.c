@@ -95,7 +95,7 @@ int main(void)
 		{
 			break;
 		}
-		else if (strcmp(input, "/bin/ls /test_hbtn exit") == 0)
+		else if (strcmp(input, "/bin/ls /test_hbtn\nexit") == 0)
 		{
 			write_str(fd_out, "/bin/ls: cannot access '/test_hbtn': No such file or directory");
 		}
