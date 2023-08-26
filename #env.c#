@@ -1,4 +1,32 @@
-#include <stdlib.h>
+File Edit Options Buffers Tools C Help
+ 8
+ 9#define MAX_ENV_VARS 100
+10#define BUFFER_SIZE 1024
+11
+12extern char **environ;
+13
+14/**
+15 * write_str - Write a string to a file descriptor.
+16 * @fd: The file descriptor to write to.
+17 * @str: The string to write.
+18 */
+19void write_str(int fd, char *str)
+20{
+	-UU-:----F1  env.c          10% (14,0)    Git-master  (C/*File Edit Options Buffers Tools C Help
+ 8
+ 9#define MAX_ENV_VARS 100
+10#define BUFFER_SIZE 1024
+11
+12extern char **environ;
+13
+14/**
+15 * write_str - Write a string to a file descriptor.
+16 * @fd: The file descriptor to write to.
+17 * @str: The string to write.
+18 */
+							       19void write_str(int fd, char *str)
+							       20{
+								       -UU-:----F1  env.c          10% (14,0)    Git-master  (C/*
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -49,7 +77,7 @@ int main(void)
 
 	while (1)
 	{
-		write_str(fd_out, "");
+		write_str(fd_out, "$ ");
 		bytes_read = read(STDIN_FILENO, input, sizeof(input));
 
 		if (bytes_read <= 0)
