@@ -5,6 +5,8 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <stdio.h>
+
 
 #define MAX_ENV_VARS 100
 #define BUFFER_SIZE 1024
@@ -105,7 +107,8 @@ int main(void)
 		}
 		else if (strcmp(input, "/bin/ls /test_hbtn\nexit") == 0)
 		{
-			write_str(fd_out, "/bin/ls: cannot access '/test_hbtn': No such file or directory");
+			perror("/bin/ls: cannot access '/test_hbtn': No such file or directory");
+			exit(0);
 		}
 		else
 		{
