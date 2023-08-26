@@ -45,11 +45,12 @@ int main(void)
 {
 	char input[BUFFER_SIZE];
 	int fd_out = STDOUT_FILENO;
+	ssize_t bytes_read;
 
 	while (1)
 	{
 		write_str(fd_out, "$ ");
-		ssize_t bytes_read = read(STDIN_FILENO, input, sizeof(input));
+		bytes_read = read(STDIN_FILENO, input, sizeof(input));
 
 		if (bytes_read <= 0)
 		{
