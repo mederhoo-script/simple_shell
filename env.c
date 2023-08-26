@@ -68,6 +68,14 @@ void handle_env_command(int fd)
 		waitpid(pid, NULL, 0);
 	}
 }
+/**
+ * handle_exit_command - handle exit command
+ * 
+ */
+void handle_exit_command()
+{
+	exit(0);
+}
 
 int main(void)
 {
@@ -93,7 +101,7 @@ int main(void)
 		}
 		else if (strcmp(input, "exit") == 0)
 		{
-			break;
+			handle_exit_command();
 		}
 		else if (strcmp(input, "/bin/ls /test_hbtn\nexit") == 0)
 		{
