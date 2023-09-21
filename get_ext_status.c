@@ -7,6 +7,11 @@
 #include <stdio.h>
 #include "shead.h"
 
+/**
+ * get_exit_status - to get status
+ *
+ * Return: nothing
+ */
 
 int get_exit_status(void)
 {
