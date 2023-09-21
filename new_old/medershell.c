@@ -67,6 +67,7 @@ char **parseInput(char *input)
  */
 void executeCommand(char *input)
 {
+	char **args;
 	pid_t pid = fork();
 
 	if (pid == -1)
@@ -90,7 +91,7 @@ void executeCommand(char *input)
 			strcat(path, input);
 		}
 
-		char **args = parseInput(input);
+		args = parseInput(input);
 
 		execve(path, args, NULL);
 

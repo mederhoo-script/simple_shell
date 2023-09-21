@@ -68,46 +68,67 @@ char **parseInput(char *input)
  */
 void executeCommand(char *input)
 {
-	pid_t pid = fork();
+    if (strcmp(input, "cd") == 0)
+    {
+        // Handle the 'cd' command (change directory)
+        char *home_dir = getenv("HOME");
+        if (home_dir == NULL)
+        {
+            perror("getenv");
+        }
+        else
+        {
+            if (chdir(home_dir) != 0)
+            {
+                perror("chdir");
+            }
+        }
+        return; // Return without forking a new process
+    }
 
-	if (pid == -1)
-	{
-		perror("fork");
-		exit(EXIT_FAILURE);
-	} else if (pid == 0)
-	{
-		/* Child process */
-		char path[MAX_PATH_SIZE];
-		char **args;
+    pid_t pid = fork();
 
-		if (input[0] == '/')
-		{
-			/* Input starts with '/', use input directly as the path */
-			strcpy(path, input);
-		}
-		else
-		{
-			/* Construct path by adding '/bin/' to the input */
-			strcpy(path, "/bin/");
-			strcat(path, input);
-		}
+    if (pid == -1)
+    {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+    else if (pid == 0)
+    {
+        /* Child process */
+        char path[MAX_PATH_SIZE];
+        char **args;
 
-		args = parseInput(input);
+        if (input[0] == '/')
+        {
+            /* Input starts with '/', use input directly as the path */
+            strcpy(path, input);
+        }
+        else
+        {
+            /* Construct path by adding '/bin/' to the input */
+            strcpy(path, "/bin/");
+            strcat(path, input);
+        }
 
-		execve(path, args, NULL);
+        args = parseInput(input);
 
-		/* If execve returns, there was an error */
-		perror("execve");
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		/* Parent process */
-		int status;
+        execve(path, args, NULL);
 
-		waitpid(pid, &status, 0);
-	}
+        /* If execve returns, there was an error */
+        perror("execve");
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        /* Parent process */
+        int status;
+
+        waitpid(pid, &status, 0);
+    }
 }
+
+
 
 /**
  * main - Entry point of the program.
@@ -145,7 +166,7 @@ int main(void)
 
 		executeCommand(input);
 
-		free(input);
+		/* free(input); */
 	}
 
 	return (0);

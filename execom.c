@@ -15,8 +15,7 @@
 
 void execute_command(char *args[])
 {
-	pid_t pid, wpid;
-	int status;
+	pid_t pid;
 
 	pid = fork();
 	if (pid == 0)
@@ -38,15 +37,5 @@ void execute_command(char *args[])
 	{
 		perror("shell");
 	}
-	else
-	{
-		/* Parent process */
-		do
 
-		{
-			wpid = waitpid(pid, &status, WUNTRACED);
-		}
-
-		while (!WIFEXITED(status) && !WIFSIGNALED(status));
-	}
 }

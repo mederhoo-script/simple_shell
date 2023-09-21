@@ -25,6 +25,7 @@ int main(void)
 			/* Handle Ctrl+D (end of file) */
 			write(STDOUT_FILENO, "\n", 1);
 			break;
+		}
 		/* Remove the trailing newline character */
 		input[bytes_read - 1] = '\0';
 

@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <errno.h>
 #include <stdio.h>
 
 
@@ -79,7 +80,14 @@ void handle_exit_command()
 {
 	exit(0);
 }
-
+/**
+ * handle_ls_command
+ 
+void handle_ls_command(int fd)
+{
+	
+}
+*/
 int main(void)
 {
 	char input[BUFFER_SIZE];
@@ -111,9 +119,30 @@ int main(void)
 			perror("/bin/ls: cannot access '/test_hbtn': No such file or directory");
 			exit(0);
 		}
+
+		else if (strcmp(input, input) == 0)
+		{
+			pid_t pid = fork();
+			if (pid < 0)
+			{
+			/* 	write_str(fd, "Fork error\n"); */
+			}
+			else if (pid == 0)
+			{
+				execlp(input, input, "-l", (char *)NULL);
+				write_str(fd_out, "Error executing ls\n");
+				_exit(1);		
+			}
+		
+			else
+			{
+				waitpid(pid, NULL, 0);
+			}
+
+		}				
 		else
 		{
-			write_str(fd_out, "Command not found\n");
+		write_str(fd_out, "Command not found\n");
 		}
 	}
 
