@@ -2,7 +2,7 @@
 
 ## Team Members
 - Hammed Amusat Oriyomi
-- Kingjerry Oludayo
+- Oludayo Jeremiah Adedayo
 
 ## Description
 This project is a simple shell program written in C. It provides a command-line interface for users to interact with the operating system. The shell supports basic commands such as `cd`, `exit`, and can execute other system commands.
