@@ -7,6 +7,11 @@
 #include <stdio.h>
 #include "shead.h"
 
+/**
+ * special_variable - spec char
+ * @var: variable
+ * Return:NULL
+ */
 
 char *special_variable(char *var) 
 {

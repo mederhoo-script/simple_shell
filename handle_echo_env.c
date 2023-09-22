@@ -7,6 +7,10 @@
 #include <stdio.h>
 #include "shead.h"
 
+/**
+ * handle_echo_env -handle echo
+ * @args: args pass
+ */
 
 void handle_echo_env(char *args[]) 
 {

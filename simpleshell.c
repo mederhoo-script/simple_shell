@@ -7,6 +7,12 @@
 #include <stdio.h>
 #include "shead.h"
 
+/**
+ * main - main
+ * @argc: agument count
+ * @argv: argument vector
+ * Return: 0
+ */
 
 #define MAX_COMMAND_LENGTH 100
 #define MAX_ARGUMENTS 10

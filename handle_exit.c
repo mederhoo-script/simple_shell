@@ -7,6 +7,10 @@
 #include <stdio.h>
 #include "shead.h"
 
+/**
+ * handle_exit - exit
+ * @args: args
+ */
 
 void handle_exit(char *args[]) 
 {

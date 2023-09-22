@@ -7,6 +7,11 @@
 #include <stdio.h>
 #include "shead.h"
 
+/**
+ * custom_read - read
+ * @buffer: buffer
+ * Return: buffer
+ */
 
 int custom_read(char **buffer) 
 {

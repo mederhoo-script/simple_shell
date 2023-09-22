@@ -7,6 +7,10 @@
 #include <stdio.h>
 #include "shead.h"
 
+/**
+ * custom_write - write
+ * @buffer: buffer
+ */
 
 void custom_write(char *buffer) 
 {

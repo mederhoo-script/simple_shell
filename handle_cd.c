@@ -9,7 +9,7 @@
 
 /**
  * handle_cd - function to handle cd command
- * @args - argument
+ * @args: - argument
  * Return: nothing
  */
 
@@ -18,6 +18,7 @@ void handle_cd(char *args[])
 	if (args[1] == NULL)
 	{
 		char err_msg[] = "shell: expected argument to \"cd\"\n";
+
 		write(STDERR_FILENO, err_msg, strlen(err_msg));
 	}
 	else
@@ -25,7 +26,9 @@ void handle_cd(char *args[])
 		if (chdir(args[1]) != 0)
 		{
 			char err_msg[50];
+
 			strcpy(err_msg, "shell: cannot cd into ");
+
 			strcat(err_msg, args[1]);
 			strcat(err_msg, "\n");
 			write(STDERR_FILENO, err_msg, strlen(err_msg));

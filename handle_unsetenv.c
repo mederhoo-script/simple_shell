@@ -7,6 +7,10 @@
 #include <stdio.h>
 #include "shead.h"
 
+/**
+ * handle_unsetenv - 
+ * @args: args pass
+ */
 
 void handle_unsetenv(char *args[]) 
 {

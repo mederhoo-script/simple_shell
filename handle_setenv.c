@@ -7,6 +7,10 @@
 #include <stdio.h>
 #include "shead.h"
 
+/**
+ * handle_setenv - setenv
+ * @args: args
+ */
 
 void handle_setenv(char *args[]) 
 {

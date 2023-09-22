@@ -7,6 +7,12 @@
 #include <stdio.h>
 #include "shead.h"
 
+/**
+ * parse_command - 
+ * @input: input
+ * @args: args
+ * Return: i
+ */
 
 int parse_command(char *input, char *args[]) 
 {
