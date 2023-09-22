@@ -17,8 +17,15 @@ void handle_exit(char *args[])
     if (args[1] != NULL) 
 	{
         int exit_status = atoi(args[1]);
-        exit(exit_status);
-    } 
+		if (exit_status > 0)
+        	exit(exit_status);
+		else if (exit_status < 0)
+		{
+			perror ("./hsh: 1: exit: Illegal number");
+			exit(2);
+		}
+
+    }
 	else 
 	{
         exit(0);
