@@ -19,7 +19,7 @@
 
 int main(int argc, char *argv[]) 
 {
-    char *input = NULL; /* Changed to dynamic allocation */
+    char *input = NULL; /* Changed to dynac allocation */
     char *args[MAX_ARGUMENTS];
 
     if (argc > 1) 

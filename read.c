@@ -9,7 +9,7 @@
 
 /**
  * custom_read - read
- * @buffer: buffer
+ * @buffer: buffe to readr
  * Return: buffer
  */
 

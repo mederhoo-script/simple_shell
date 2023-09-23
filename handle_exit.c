@@ -9,7 +9,7 @@
 
 /**
  * handle_exit - exit
- * @args: args
+ * @args: args teke in
  */
 
 void handle_exit(char *args[]) 
