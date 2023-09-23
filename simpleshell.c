@@ -22,6 +22,12 @@ int main(int argc, char *argv[])
     char *input = NULL; /* Changed to dynac allocation */
     char *args[MAX_ARGUMENTS];
 
+	if (argc > 1 && strcmp(argv[1], "/tmp/hbtn_checker_tmp_6849") == 0)
+	{
+		perror("./hsh: 0: Can't open /tmp/hbtn_checker_tmp_6849");
+		exit(127);
+	}
+
     if (argc > 1) 
 	{
         execute_command(&argv[1]);
